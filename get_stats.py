@@ -82,27 +82,41 @@ data = pickle.load(open( '/home/dpappas/scripts_dict.p', "rb" ) )
 # plt.savefig('users_per_lines_number.png')
 
 
+# print('')
+# N = 0
+# ys = []
+# labels = []
+# stats = get_token_stats(data)
+# for i in range(0, max(stats.keys()), 300):
+#     if(i==2700):
+#         too = max(stats.keys())
+#         s = sum([ stats[m] for m in stats.keys() if(m>i and m<=too)])
+#         print(i,too,s)
+#         labels.append(str(i)+' to '+str(too))
+#         ys.append(s)
+#         N+=1
+#         break
+#     else:
+#         too = min(i+300, max(stats.keys()))
+#         s = sum([ stats[m] for m in stats.keys() if(m>i and m<=too)])
+#         print(i,too,s)
+#         labels.append(str(i)+' to '+str(too))
+#         ys.append(s)
+#         N+=1
+
+
 print('')
 N = 0
 ys = []
 labels = []
 stats = get_token_stats(data)
 for i in range(0, max(stats.keys()), 300):
-    if(i==2700):
-        too = max(stats.keys())
-        s = sum([ stats[m] for m in stats.keys() if(m>i and m<=too)])
-        print(i,too,s)
-        labels.append(str(i)+' to '+str(too))
-        ys.append(s)
-        N+=1
-        break
-    else:
-        too = min(i+300, max(stats.keys()))
-        s = sum([ stats[m] for m in stats.keys() if(m>i and m<=too)])
-        print(i,too,s)
-        labels.append(str(i)+' to '+str(too))
-        ys.append(s)
-        N+=1
+    too = min(i+300, max(stats.keys()))
+    s = sum([ stats[m] for m in stats.keys() if(m>i and m<=too)])
+    print(i,too,s)
+    labels.append(str(i)+' to '+str(too))
+    ys.append(s)
+    N+=1
 
 ind = np.arange(N)
 width = 0.3
@@ -112,7 +126,7 @@ plt.xlabel('Number of Tokens')
 plt.title('Number of Users per Number of Tokens')
 plt.xticks(ind + width/2, labels, rotation='vertical', fontsize=7)
 # plt.show()
-plt.savefig('users_per_tokens_number_2.png')
+plt.savefig('users_per_tokens_number.png')
 
 
 # len(data)
