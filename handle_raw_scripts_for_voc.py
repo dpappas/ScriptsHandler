@@ -11,16 +11,17 @@ def replace_numbers(text):
     return text
 
 def fix_text(text):
+    puncs = string.punctuation+u'«»“”‘’—§›¶…΄·'
     text = replace_numbers(text)
     text = re.sub( r'<!--.*-->','',text , flags=re.DOTALL)
     text = re.sub('<.*?>','',text)
     text = re.sub('\(.*?\)','',text, flags=re.DOTALL)
     text = text.lower()
-    text = re.sub(r'(['+string.punctuation+'])',r' \1 ',text)
+    text = re.sub(r'(['+puncs+'])',r' \1 ',text)
     l = -3
     while(len(text)!=l):
         l = len(text)
-        text = re.sub(r'(['+string.punctuation+'])  (['+string.punctuation+'])',r'\1\2',text)
+        text = re.sub(r'(['+puncs+'])  (['+puncs+'])',r'\1\2',text)
     text = text.replace('_ double _','_double_')
     text = text.replace('_ integer _','_integer_')
     text = re.sub("\s+"," ",text)
@@ -44,7 +45,17 @@ with open('all_scripts_together.txt','w') as f:
     f.close()
 
 
-
+# i = 0
+# for dato in data:
+#     i += 1
+#     # print(dato.keys())
+#     dato['script'] = replace_numbers( dato['script'] )
+#     dato['script'] = fix_text( dato['script'] )
+#     # print(dato['script'])
+#     with open(str(i)+'.txt','w') as f:
+#         f.write(dato['script'])
+#         f.close()
+#     print(str(i)+' of '+str(len(data)))
 
 
 

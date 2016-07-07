@@ -77,7 +77,6 @@ def get_stats(data):
                 ret[l] = 1
     return ret
 
-
 data = pickle.load(open( '/home/dpappas/scripts_dict.p', 'rb'))
 
 texts = get_texts_with_greater_len(data, 50)

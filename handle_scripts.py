@@ -8,6 +8,7 @@ from os import listdir
 from os.path import isfile, join
 import sys
 from traceback import format_exc
+import string
 
 def count_spaces_on_start_of(s):
     m = 0
@@ -143,6 +144,23 @@ def get_script_as_dic(lines,f,nl):
 def get_files_of_folder(directory):
     # return [directory+f for f in listdir(directory) if isfile(join(directory, f))]
     return [f.replace('.txt','').strip() for f in listdir(directory) if isfile(join(directory, f))]
+
+def replace_numbers(text):
+    text = re.sub(r'[-+]?\d*\.\d+','  _double_  ',text)
+    text = re.sub(r'[-+]?\d+','  _integer_  ',text)
+    return text
+
+def fix_text(text):
+    text = text.lower()
+    puncs = string.punctuation+u'«»“”‘’—§›¶…΄·'
+    text = re.sub(r'(['+puncs+'])',r' \1 ',text)
+    l = -3
+    while(len(text)!=l):
+        l = len(text)
+        text = re.sub(r'(['+puncs+'])  (['+puncs+'])',r'\1\2',text)
+    replace_numbers(text)
+    text = re.sub("\s+"," ",text)
+    return text.replace('\n',' ')
 
 dirr = '/home/dpappas/gate_processed_new/'
 
