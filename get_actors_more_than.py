@@ -51,10 +51,6 @@ pprint(held_out.keys())
 pickle.dump(held_out,open('held_out_scripts.p','wb'))
 
 
-# import pickle
-# d = pickle.load(open('held_out_scripts.p','rb'))
-# print(d.keys())
-# print(d['Up_RUSSELL'])
 
 
 
